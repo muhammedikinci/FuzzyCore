@@ -1,0 +1,7 @@
+C:\Users\muham\Documents\Visual Studio 2015\Projects\FuzzyCore\FuzzyCore\obj\Debug\FuzzyCore.csprojResolveAssemblyReference.cache
+C:\Users\muham\Documents\Visual Studio 2015\Projects\FuzzyCore\FuzzyCore\bin\Debug\FuzzyCore.dll
+C:\Users\muham\Documents\Visual Studio 2015\Projects\FuzzyCore\FuzzyCore\bin\Debug\FuzzyCore.pdb
+C:\Users\muham\Documents\Visual Studio 2015\Projects\FuzzyCore\FuzzyCore\bin\Debug\Newtonsoft.Json.dll
+C:\Users\muham\Documents\Visual Studio 2015\Projects\FuzzyCore\FuzzyCore\bin\Debug\Newtonsoft.Json.xml
+C:\Users\muham\Documents\Visual Studio 2015\Projects\FuzzyCore\FuzzyCore\obj\Debug\FuzzyCore.dll
+C:\Users\muham\Documents\Visual Studio 2015\Projects\FuzzyCore\FuzzyCore\obj\Debug\FuzzyCore.pdb
