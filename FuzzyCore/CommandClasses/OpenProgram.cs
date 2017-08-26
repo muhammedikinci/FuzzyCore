@@ -5,10 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.IO;
-using fuzzyControl.Server.Data;
+using FuzzyCore.Server.Data;
 using System.Threading;
 
-namespace fuzzyControl.Server.Commands
+namespace FuzzyCore.Server.Commands
 {
     class OpenProgram
     {
