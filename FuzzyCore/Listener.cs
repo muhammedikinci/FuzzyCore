@@ -7,7 +7,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 
-namespace fuzzyControl.Server
+namespace FuzzyCore.Server
 {
     public class Listener
     {
