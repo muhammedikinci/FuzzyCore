@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using fuzzyControl.Server.Data;
+using FuzzyCore.Server.Data;
 
-namespace fuzzyControl.Server
+namespace FuzzyCore.Server
 {
     public class GetProcesses_Command : Command
     {
