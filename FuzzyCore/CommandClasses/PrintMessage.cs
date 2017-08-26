@@ -7,7 +7,7 @@ using System.Windows.Forms;
 using System.Threading;
 using System.Drawing;
 
-namespace fuzzyControl.Server.Data
+namespace FuzzyCore.Server.Data
 {
     class PrintMessage
     {
