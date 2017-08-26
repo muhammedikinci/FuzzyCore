@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 
-namespace fuzzyControl.Server
+namespace FuzzyCore.Server
 {
     class ClientDestroyer
     {
