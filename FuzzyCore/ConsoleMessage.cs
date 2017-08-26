@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace fuzzyControl.Server
+namespace FuzzyCore.Server
 {
-    class ConsoleMessage
+    public class ConsoleMessage
     {
         public enum MessageType
         {
