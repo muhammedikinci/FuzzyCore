@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace fuzzyControl.Server.Commands
+namespace FuzzyCore.Server.Commands
 {
     class GetFile
     {
