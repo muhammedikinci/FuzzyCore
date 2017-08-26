@@ -5,7 +5,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace fuzzyControl.Server
+namespace FuzzyCore.Server
 {
     class Client
     {
