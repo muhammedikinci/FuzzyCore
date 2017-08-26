@@ -1,8 +1,7 @@
 # FuzzyCore
 remote control
-```
 <b><h2>Example Print Message</h2></b>
-```javascript
+```json
 {
   "CommandType"   : "print_message",
   "FormCaption"   : "Test Form",
