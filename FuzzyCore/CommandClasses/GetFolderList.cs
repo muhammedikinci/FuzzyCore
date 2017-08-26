@@ -8,9 +8,9 @@ using System.Net;
 using System.Net.Sockets;
 using Newtonsoft.Json;
 using System.Threading;
-using fuzzyControl.Server.Data;
+using FuzzyCore.Server.Data;
 
-namespace fuzzyControl.Server.Commands
+namespace FuzzyCore.Server.Commands
 {
     public class GetFolderList
     {
