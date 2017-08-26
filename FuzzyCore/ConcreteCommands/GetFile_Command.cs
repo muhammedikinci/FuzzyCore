@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using fuzzyControl.Server.Data;
-using fuzzyControl.Server.Commands;
+using FuzzyCore.Server.Data;
+using FuzzyCore.Server.Commands;
 
-namespace fuzzyControl.Server
+namespace FuzzyCore.Server
 {
     public class GetFile_Command : Command
     {
