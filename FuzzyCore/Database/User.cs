@@ -12,6 +12,6 @@ namespace FuzzyCore.Database.Models
         public ObjectId _id { get; set; }
         public string name { get; set; }
         public string password { get; set; }
-        public string premission { get; set; }
+        public string permission { get; set; }
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FuzzyCore.Server.Data;
+using FuzzyCore.Server.Commands;
 
 namespace FuzzyCore.Server
 {
@@ -15,7 +16,7 @@ namespace FuzzyCore.Server
 
         public override void Execute()
         {
-            Console.WriteLine(Comm.CommandType);
+            OpenProgram Op = new OpenProgram(Comm);
         }
     }
 }

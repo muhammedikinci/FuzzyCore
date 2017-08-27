@@ -9,38 +9,44 @@ using System.Threading;
 
 namespace FuzzyCore.Server
 {
-    public class Listener
+    public class FuzzyServer
     {
+        public bool ReceiveData_Permission { get; set; } = true;
+        public bool AcceptClient_Permission { get; set; } = true;
+        public bool socketState { get { return SocketStatePrivate; } }
+        private bool SocketStatePrivate = false;
         private EndPoint localEP;
-
         private byte[] _buff = new byte[1024];
         private byte[] copyBuff;
-
         private ConsoleMessage Message = new ConsoleMessage();
-
         private Socket ServerSocket = new Socket(AddressFamily.InterNetwork,SocketType.Stream,ProtocolType.Tcp);
         private static Dictionary<int, Client> SocketList = new Dictionary<int, Client>();
-
         private Thread DestroyThread = new Thread(new ThreadStart(() => {
             while (true)
             {
                 ClientDestroyer Destroyer = new ClientDestroyer(ref SocketList);
             }
         }));
-
         //For Receive Catch Block
         Socket CurrentSocket;
+        public FuzzyServer(EndPoint glEP)
+        {
+            this.localEP = glEP;
+        }
 
-        public Listener(EndPoint glEP)
+        public void startListen()
         {
             try
             {
-                localEP = glEP;
+                if (!AcceptClient_Permission)
+                {
+                    throw new Exception("Accept Client Permission Is False");
+                }
                 ServerSocket.Bind(localEP);
                 ServerSocket.Listen(2);
                 ServerSocket.BeginAccept(new AsyncCallback(AcceptSocket), ServerSocket);
             }
-            catch (SocketException Ex)
+            catch (Exception Ex)
             {
                 Message.Write(Ex.Message.ToString(), ConsoleMessage.MessageType.ERROR);
             }
@@ -50,6 +56,11 @@ namespace FuzzyCore.Server
         {
             try
             {
+                if (!AcceptClient_Permission)
+                {
+                    throw new Exception("Accept Client Permission Is False");
+                }
+                SocketStatePrivate = true;
                 if (!DestroyThread.IsAlive)
                 {
                     DestroyThread.IsBackground = true;
@@ -99,10 +110,15 @@ namespace FuzzyCore.Server
                 SocketList.Add(CurrentClientId, CurrentClient);
                 //Write Message
                 Message.Write(AccSocket.RemoteEndPoint.ToString(), ConsoleMessage.MessageType.CONNECT);
-                //Begin Receive in Current Client Stream
-                AccSocket.BeginReceive(_buff, 0, _buff.Length, SocketFlags.None, new AsyncCallback(ReceiveData), AccSocket);
                 //We accepting new connection again
                 ServerSocket.BeginAccept(new AsyncCallback(AcceptSocket), ServerSocket);
+
+                if (!AcceptClient_Permission)
+                {
+                    throw new Exception("Accept Client Permission Is False");
+                }
+                //Begin Receive in Current Client Stream
+                AccSocket.BeginReceive(_buff, 0, _buff.Length, SocketFlags.None, new AsyncCallback(ReceiveData), AccSocket);
             }
             catch (Exception Ex)
             {
@@ -114,6 +130,10 @@ namespace FuzzyCore.Server
         {
             try
             {
+                if (!ReceiveData_Permission)
+                {
+                    throw new Exception("Receive Data Permission Is False");
+                }
                 CurrentSocket = (Socket)State.AsyncState;
                 int ReceivedInt = CurrentSocket.EndReceive(State);
                 copyBuff = new byte[ReceivedInt];
@@ -130,7 +150,7 @@ namespace FuzzyCore.Server
                     Message.Write(CurrentSocket.RemoteEndPoint.ToString(), ConsoleMessage.MessageType.DISCONNECT);
                 }
             }
-            catch (SocketException Ex)
+            catch (Exception Ex)
             {
                 Message.Write(Ex.Message.ToString(), ConsoleMessage.MessageType.ERROR);
                 SocketList[FoundSocketID(CurrentSocket)].CLOSEDSTATE = Client.ClosedStates.FORCIBLY;
@@ -181,6 +201,14 @@ namespace FuzzyCore.Server
                 }
             }
             return new Client();
+        }
+
+        public void SendDataAllClient(string Data)
+        {
+            foreach (KeyValuePair<int, Client> item in SocketList)
+            {
+                item.Value.SOCKET.Send(Encoding.UTF8.GetBytes(Data));
+            }
         }
 
     }

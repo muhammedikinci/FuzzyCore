@@ -24,9 +24,37 @@ namespace FuzzyCore.Server.Commands
             }
         }
 
-        public void Open(JsonCommand Comm)
+        public OpenProgram(JsonCommand Comm)
         {
             this.Comm = Comm;
+            DataProcess();
+        }
+
+        void DataProcess()
+        {
+            if (!string.IsNullOrEmpty(Comm.Text))
+            {
+                if (Comm.OverTime > 500 && Comm.AfterTime > 500)
+                {
+                    OpenOverAndAfter();
+                }
+                else if (Comm.OverTime > 500)
+                {
+                    OpenOver();
+                }
+                else if (Comm.AfterTime > 500)
+                {
+                    OpenAfter();
+                }
+                else
+                {
+                    Open();
+                }
+            }
+        }
+
+        void Open()
+        {
             OpenJson();
             for (int i = 0; i < Progs.Count; i++)
             {
@@ -36,9 +64,8 @@ namespace FuzzyCore.Server.Commands
                 }
             }
         }
-        public void OpenAfter(JsonCommand Comm)
+        void OpenAfter()
         {
-            this.Comm = Comm;
             OpenJson();
             for (int i = 0; i < Progs.Count; i++)
             {
@@ -55,9 +82,8 @@ namespace FuzzyCore.Server.Commands
             Thread.Sleep((int)Comm.AfterTime);
             System.Diagnostics.Process.Start(Progs[CurrentProgramIndex].Path);
         }
-        public void OpenOver(JsonCommand Comm)
+        void OpenOver()
         {
-            this.Comm = Comm;
             OpenJson();
             for (int i = 0; i < Progs.Count; i++)
             {
@@ -78,9 +104,8 @@ namespace FuzzyCore.Server.Commands
                 Process.Kill();
             }
         }
-        public void OpenOverAndAfter(JsonCommand Comm)
+        public void OpenOverAndAfter()
         {
-            this.Comm = Comm;
             OpenJson();
             for (int i = 0; i < Progs.Count; i++)
             {

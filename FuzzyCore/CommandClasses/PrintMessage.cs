@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
 using System.Drawing;
+using FuzzyCore.Server.Data;
 
-namespace FuzzyCore.Server.Data
+namespace FuzzyCore.Server.Commands
 {
     class PrintMessage
     {
@@ -37,30 +38,60 @@ namespace FuzzyCore.Server.Data
             CommandForm.Controls.Add(Text);
         }
 
-        public void Print_Message_OverAndAfterTime(JsonCommand Comm)
+        public PrintMessage(JsonCommand comm)
         {
-            Command = Comm;
+            this.Command = comm;
+            DataProcess();
+        }
+
+        void DataProcess()
+        {
+            if (!string.IsNullOrEmpty(Command.Text))
+            {
+                if (Command.Repeat == true && Command.RepeatStep > 0)
+                {
+                    //Print_Message_With_Args();
+                }
+                else if (Command.OverTime > 500 && Command.AfterTime > 500)
+                {
+                    Print_Message_OverAndAfterTime();
+                }
+                else if (Command.OverTime > 500)
+                {
+                    Print_Message_OverTime();
+                }
+                else if (Command.AfterTime > 500)
+                {
+                    Print_Message_AfterTime();
+                }
+                else
+                {
+                    Print_Message();
+                }
+            }
+            else { }
+        }
+
+        void Print_Message_OverAndAfterTime()
+        {
             Thread FormOpen = new Thread(new ThreadStart(OpenForm_PrintMessage));
             FormOpen.Start();
             Thread FormClosingOverTime = new Thread(new ThreadStart(FormClosingOverTime_PrintMessage));
             FormClosingOverTime.Start();
         }
-        public void Print_Message(JsonCommand Comm)
+        void Print_Message()
         {
-            Command = Comm;
             OpenForm_PrintMessage();
         }
 
-        public void Print_Message_AfterTime(JsonCommand Comm)
+        void Print_Message_AfterTime()
         {
-            Command = Comm;
             Thread FormOpen = new Thread(new ThreadStart(FormOpenAfterTime_PrintMessage));
             FormOpen.Start();
         }
 
-        public void Print_Message_OverTime(JsonCommand Comm)
+        void Print_Message_OverTime()
         {
-            Command = Comm;
             Thread FormOpen = new Thread(new ThreadStart(OpenForm_PrintMessage));
             FormOpen.Start();
             Thread FormClosingOverTime = new Thread(new ThreadStart(FormClosingOverTime_PrintMessage));

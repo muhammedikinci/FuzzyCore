@@ -21,7 +21,7 @@ namespace FuzzyCore.Database.Models
         public User Get(string UserName, string Password)
         {
             User failUser = new User();
-            failUser.premission = "FAIL";
+            failUser.permission = "FAIL";
             try
             {
 
