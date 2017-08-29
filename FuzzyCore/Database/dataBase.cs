@@ -3,19 +3,135 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MongoDB.Bson.IO;
-using MongoDB.Bson.Serialization;
-using MongoDB.Driver.Linq;
-using MongoDB.Driver;
-using MongoDB.Driver.GeoJsonObjectModel;
-using MongoDB.Bson;
 
 namespace FuzzyCore.Database
 {
     public class dataBase
     {
-        MongoClient monClient = new MongoClient("mongodb://localhost:27017");
-        public IMongoDatabase monData;
-        public dataBase() { monData = monClient.GetDatabase("NetworkApp"); }
+        public databases Database = databases.NULL;
+        public string Host = null;
+        public string UserName = null;
+        public string Password = null;
+        public string DatabaseName = null;
+
+        public mongodb Mongodb { get { return Mongodb_Private; } }
+        public mysql Mysql { get { return Mysql_Private; } }
+        public mssql Mssql { get { return Mssql_Private; } }
+
+        private mongodb Mongodb_Private;
+        private mysql Mysql_Private;
+        private mssql Mssql_Private;
+
+        public enum databases
+        {
+            MONGODB,
+            MYSQL,
+            MSSQL,
+            NULL
+        }
+
+        public void init()
+        {
+            int stat = variableControl();
+
+            if (stat == 0)
+            {
+                Console.WriteLine("Selected database : " + Database);
+                Console.WriteLine("Initializing " + Database);
+                switch (Database)
+                {
+                    case databases.MONGODB:
+                        Mongodb_Private = new mongodb(DatabaseName,Host,UserName,Password);
+                        break;
+                    case databases.MSSQL:
+                        break;
+                    case databases.MYSQL:
+                        break;
+                    case databases.NULL:
+                        break;
+                }
+            }
+            else if (stat == 1)
+            {
+                Console.WriteLine("Selected database : " + Database);
+                Console.WriteLine("Initializing " + Database);
+                switch (Database)
+                {
+                    case databases.MONGODB:
+                        Mongodb_Private = new mongodb(DatabaseName , Host);
+                        break;
+                    case databases.MSSQL:
+                        break;
+                    case databases.MYSQL:
+                        break;
+                    case databases.NULL:
+                        break;
+                }
+            }
+            else if (stat == 2)
+            {
+                Console.WriteLine("Selected database : " + Database);
+                Console.WriteLine("Initializing " + Database);
+                switch (Database)
+                {
+                    case databases.MONGODB:
+                        Mongodb_Private = new mongodb(DatabaseName);
+                        break;
+                    case databases.MSSQL:
+                        break;
+                    case databases.MYSQL:
+                        break;
+                    case databases.NULL:
+                        break;
+                }
+            }
+            else
+            {
+                Console.WriteLine("Database or database name not selected!");
+            }
+        }
+
+        public int variableControl()
+        {
+            if (!string.IsNullOrEmpty(DatabaseName) && Database != databases.NULL && Host != null && UserName != null && Password != null)
+            {
+                return 0;
+            }
+            else if (!string.IsNullOrEmpty(DatabaseName) && Database != databases.NULL && Host != null)
+            {
+                return 1;
+            }
+            else if (!string.IsNullOrEmpty(DatabaseName) && Database != databases.NULL)
+            {
+                return 2;
+            }
+            else
+            {
+                return 3;
+            }
+        }
+
+        //Full data constructor = 0
+        public dataBase(databases Database , string DatabaseName , string UserName , string Password , string Host)
+        {
+            this.Database = Database;
+            this.DatabaseName = DatabaseName;
+            this.Host = Host;
+            this.UserName = UserName;
+            this.Password = Password;
+        }
+        //Database Name contructor = 1
+        public dataBase(databases Database , string DatabaseName)
+        {
+            this.Database = Database;
+            this.DatabaseName = DatabaseName;
+        }
+        //Database Name and host contructor = 2
+        public dataBase(databases Database, string DatabaseName , string Host)
+        {
+            this.Database = Database;
+            this.DatabaseName = DatabaseName;
+            this.Host = Host;
+        }
     }
 }

@@ -18,17 +18,23 @@ namespace FuzzyCore.Database.Models
         private string UserName { get; set; }
         private string Password { get; set; }
 
+        dataBase db;
+
+        public UserOperations(dataBase db)
+        {
+            this.db = db;
+        }
+
         public User Get(string UserName, string Password)
         {
             User failUser = new User();
             failUser.permission = "FAIL";
             try
             {
-
+                db.init();
                 this.UserName = UserName;
                 this.Password = Password;
-                dataBase db = new dataBase();
-                var collection = db.monData.GetCollection<User>("Users");
+                var collection = db.Mongodb.monData.GetCollection<User>("Users");
                 var list = collection.Find(x => x.name == this.UserName && x.password == this.Password).ToListAsync().Result;
                 if (list.Count > 0)
                 {

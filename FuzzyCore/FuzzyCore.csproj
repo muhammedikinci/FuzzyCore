@@ -78,6 +78,9 @@
     <Compile Include="ConsoleMessage.cs" />
     <Compile Include="Database\dataBase.cs" />
     <Compile Include="DatabaseModels\UserOperations.cs" />
+    <Compile Include="Database\mongodb.cs" />
+    <Compile Include="Database\mssql.cs" />
+    <Compile Include="Database\mysql.cs" />
     <Compile Include="Database\User.cs" />
     <Compile Include="Data\DataParser.cs" />
     <Compile Include="Data\JsonCommand.cs" />
