@@ -28,6 +28,7 @@ namespace FuzzyCore.Server
             }
         }));
         public Action<string,Client> ReceiverTask;
+        public Action<Client> AcceptTask;
 
         //For Receive Catch Block
         Socket CurrentSocket;
@@ -109,6 +110,11 @@ namespace FuzzyCore.Server
                 CurrentClient.CLOSEDSTATE = Client.ClosedStates.NULL;
                 CurrentClient.LASTCONNECTIONTIME = DateTime.Now.ToString();
                 CurrentClient.PROCESS = 0;
+
+                Thread AcceptTaskTh = new Thread(new ThreadStart(() => {
+                    AcceptTask(CurrentClient);
+                }));
+                AcceptTaskTh.Start();
 
                 //Add created client to socket list
                 SocketList.Add(CurrentClientId, CurrentClient);
