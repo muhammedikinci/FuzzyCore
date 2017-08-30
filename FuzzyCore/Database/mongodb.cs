@@ -18,7 +18,14 @@ namespace FuzzyCore.Database
         ConsoleMessage Message = new ConsoleMessage();
         const string defaultHostName = "mongodb://localhost:27017";
         MongoClient monClient;
-        bool MongoInıt = false;
+        public bool MongoInıt
+        {
+            get
+            {
+                return MongoInıt_Pri;
+            }
+        }
+        private bool MongoInıt_Pri = false;
         public IMongoDatabase monData;
         public mongodb(string Database)
         {
@@ -31,12 +38,12 @@ namespace FuzzyCore.Database
                 if (isMongoLive)
                 {
                     Message.Write("Connected MongoDB!", ConsoleMessage.MessageType.SUCCESS);
-                    MongoInıt = true;
+                    MongoInıt_Pri = true;
                 }
                 else
                 {
                     Message.Write("Not Connected MongoDB!", ConsoleMessage.MessageType.ERROR);
-                    MongoInıt = false;
+                    MongoInıt_Pri = false;
                 }
             }
             catch (Exception ex)

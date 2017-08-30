@@ -14,6 +14,8 @@ namespace FuzzyCore.Database
         public string Password = null;
         public string DatabaseName = null;
 
+        Server.ConsoleMessage Message = new Server.ConsoleMessage();
+
         public mongodb Mongodb { get { return Mongodb_Private; } }
         public mysql Mysql { get { return Mysql_Private; } }
         public mssql Mssql { get { return Mssql_Private; } }
@@ -36,8 +38,8 @@ namespace FuzzyCore.Database
 
             if (stat == 0)
             {
-                Console.WriteLine("Selected database : " + Database);
-                Console.WriteLine("Initializing " + Database);
+                Message.Write("Selected database : " + Database, Server.ConsoleMessage.MessageType.BACKPROCESS);
+                Message.Write("Initializing", Server.ConsoleMessage.MessageType.BACKPROCESS);
                 switch (Database)
                 {
                     case databases.MONGODB:
@@ -53,8 +55,8 @@ namespace FuzzyCore.Database
             }
             else if (stat == 1)
             {
-                Console.WriteLine("Selected database : " + Database);
-                Console.WriteLine("Initializing " + Database);
+                Message.Write("Selected database : " + Database, Server.ConsoleMessage.MessageType.BACKPROCESS);
+                Message.Write("Initializing", Server.ConsoleMessage.MessageType.BACKPROCESS);
                 switch (Database)
                 {
                     case databases.MONGODB:
@@ -70,8 +72,8 @@ namespace FuzzyCore.Database
             }
             else if (stat == 2)
             {
-                Console.WriteLine("Selected database : " + Database);
-                Console.WriteLine("Initializing " + Database);
+                Message.Write("Selected database : " + Database, Server.ConsoleMessage.MessageType.BACKPROCESS);
+                Message.Write("Initializing", Server.ConsoleMessage.MessageType.BACKPROCESS);
                 switch (Database)
                 {
                     case databases.MONGODB:

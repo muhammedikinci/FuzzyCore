@@ -14,6 +14,8 @@ namespace FuzzyCore.Server
             SUCCESS,
             CONNECT,
             DISCONNECT,
+            PROCESS,
+            BACKPROCESS,
             NORMAL
         }
         public void Write(String Message , MessageType mType)
@@ -38,9 +40,9 @@ namespace FuzzyCore.Server
             }
             else if (mType == MessageType.DISCONNECT)
             {
-                Console.ForegroundColor = ConsoleColor.Red;
+                Console.BackgroundColor = ConsoleColor.Red;
                 Console.WriteLine("DISCONNECT : " + Message);
-                Console.ForegroundColor = ConsoleColor.Gray;
+                Console.BackgroundColor = ConsoleColor.Gray;
             }
             else if (mType == MessageType.NORMAL)
             {
@@ -48,6 +50,19 @@ namespace FuzzyCore.Server
                 Console.WriteLine("MESSAGE : " + Message);
                 Console.ForegroundColor = ConsoleColor.Gray;
             }
+            else if (mType == MessageType.PROCESS)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(Message);
+                Console.ForegroundColor = ConsoleColor.Gray;
+            }
+            else if (mType == MessageType.BACKPROCESS)
+            {
+                Console.BackgroundColor = ConsoleColor.DarkBlue;
+                Console.WriteLine(Message);
+                Console.BackgroundColor = ConsoleColor.Black;
+            }
         }
     }
 }
+

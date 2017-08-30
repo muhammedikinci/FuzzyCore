@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FuzzyCore.Server
 {
-    class Client
+    public class Client
     {
         public int ID { get; set; }
         public Socket SOCKET { get; set; }

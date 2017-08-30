@@ -27,6 +27,8 @@ namespace FuzzyCore.Server
                 ClientDestroyer Destroyer = new ClientDestroyer(ref SocketList);
             }
         }));
+        public Action<string,Client> ReceiverTask;
+
         //For Receive Catch Block
         Socket CurrentSocket;
         public FuzzyServer(EndPoint glEP)
@@ -44,7 +46,8 @@ namespace FuzzyCore.Server
                 }
                 ServerSocket.Bind(localEP);
                 ServerSocket.Listen(2);
-                ServerSocket.BeginAccept(new AsyncCallback(AcceptSocket), ServerSocket);
+                SocketStatePrivate = true;
+                ServerSocket.BeginAccept(new AsyncCallback(AcceptSocket),ServerSocket);
             }
             catch (Exception Ex)
             {
@@ -52,7 +55,7 @@ namespace FuzzyCore.Server
             }
         }
 
-        public void AcceptSocket(IAsyncResult State)
+        void AcceptSocket(IAsyncResult State)
         {
             try
             {
@@ -60,12 +63,13 @@ namespace FuzzyCore.Server
                 {
                     throw new Exception("Accept Client Permission Is False");
                 }
-                SocketStatePrivate = true;
+
                 if (!DestroyThread.IsAlive)
                 {
                     DestroyThread.IsBackground = true;
                     DestroyThread.Start();
                 }
+
                 //Create current accepted socket
                 Socket AccSocket = ServerSocket.EndAccept(State);
 
@@ -143,6 +147,8 @@ namespace FuzzyCore.Server
                 if (!string.IsNullOrEmpty(Data))
                 {
                     DataParser parser = new DataParser(Data, CurrentSocket);
+                    Thread reciveTask = new Thread(new ThreadStart(() => { ReceiverTask(Data, GetClientBySocket(CurrentSocket)); }));
+                    reciveTask.Start();
                     CurrentSocket.BeginReceive(_buff, 0, _buff.Length, SocketFlags.None, new AsyncCallback(ReceiveData), CurrentSocket);
                 }
                 else
