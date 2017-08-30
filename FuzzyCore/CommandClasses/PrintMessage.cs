@@ -86,12 +86,14 @@ namespace FuzzyCore.Server.Commands
 
         void Print_Message_AfterTime()
         {
+            Create_Form();
             Thread FormOpen = new Thread(new ThreadStart(FormOpenAfterTime_PrintMessage));
             FormOpen.Start();
         }
 
         void Print_Message_OverTime()
         {
+            Create_Form();
             Thread FormOpen = new Thread(new ThreadStart(OpenForm_PrintMessage));
             FormOpen.Start();
             Thread FormClosingOverTime = new Thread(new ThreadStart(FormClosingOverTime_PrintMessage));
@@ -116,7 +118,7 @@ namespace FuzzyCore.Server.Commands
         //Form Open After Time
         void FormOpenAfterTime_PrintMessage()
         {
-            Thread.Sleep((int)Command.OverTime);
+            Thread.Sleep((int)Command.AfterTime);
             Application.Run(CommandForm);
         }
         //{ "CommandType":"print_message","Text":"hello","OverTime":5 } 
