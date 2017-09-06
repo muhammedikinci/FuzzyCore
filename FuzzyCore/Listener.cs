@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using FuzzyCore.Data;
 
 namespace FuzzyCore.Server
 {
@@ -13,8 +14,8 @@ namespace FuzzyCore.Server
     {
         public bool ReceiveData_Permission { get; set; } = true;
         public bool AcceptClient_Permission { get; set; } = true;
-        public bool socketState { get { return SocketStatePrivate; } }
-        private bool SocketStatePrivate = false;
+        public static bool socketState { get { return SocketStatePrivate; } }
+        private static bool SocketStatePrivate = false;
         private EndPoint localEP;
         private byte[] _buff = new byte[1024];
         private byte[] copyBuff;

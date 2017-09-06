@@ -4,15 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using FuzzyCore.Server.Data;
+using FuzzyCore.Server;
+using FuzzyCore.Commands;
 using System.Net.Sockets;
 using System.Net;
 using System.Diagnostics;
 using System.Threading;
 
-namespace FuzzyCore.Server
+namespace FuzzyCore.Data
 {
-    class DataParser
+    public class DataParser
     {
         public DataParser(String Data, Socket Client)
         {

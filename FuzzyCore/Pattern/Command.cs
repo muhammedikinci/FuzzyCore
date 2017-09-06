@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FuzzyCore.Server.Data;
+﻿using FuzzyCore.Data;
 
-namespace FuzzyCore.Server
+namespace FuzzyCore.Commands
 {
     public abstract class Command
     {

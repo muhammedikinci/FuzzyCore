@@ -14,6 +14,9 @@ namespace FuzzyCore.Server
         public string LASTCONNECTIONTIME { get; set; }
         public ClosedStates CLOSEDSTATE { get; set; }
         public int PROCESS { get; set; }
+        public bool LOGIN { get; set; }
+        public string USERNAME { get; set; }
+        public string PERMISSION { get; set; }
 
         public enum ClosedStates
         {

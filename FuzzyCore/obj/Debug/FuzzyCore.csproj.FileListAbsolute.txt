@@ -12,3 +12,4 @@ C:\Users\muham\Documents\Visual Studio 2015\Projects\FuzzyCore\FuzzyCore\bin\Deb
 C:\Users\muham\Documents\Visual Studio 2015\Projects\FuzzyCore\FuzzyCore\bin\Debug\MongoDB.Driver.xml
 C:\Users\muham\Documents\Visual Studio 2015\Projects\FuzzyCore\FuzzyCore\bin\Debug\MongoDB.Driver.Core.xml
 C:\Users\muham\Documents\Visual Studio 2015\Projects\FuzzyCore\FuzzyCore\obj\Debug\FuzzyCore.csprojResolveAssemblyReference.cache
+C:\Users\muham\Documents\Visual Studio 2015\Projects\FuzzyCore\FuzzyCore\bin\Debug\FuzzyCore.dll.config

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Sockets;
 
-namespace FuzzyCore.Server.Data
+namespace FuzzyCore.Data
 {
     public class JsonCommand
     {

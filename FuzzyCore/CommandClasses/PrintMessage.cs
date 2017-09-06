@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
 using System.Drawing;
-using FuzzyCore.Server.Data;
+using FuzzyCore.Data;
 
-namespace FuzzyCore.Server.Commands
+namespace FuzzyCore.Commands
 {
-    class PrintMessage
+    public class PrintMessage
     {
         Form CommandForm = new Form();
         JsonCommand Command;

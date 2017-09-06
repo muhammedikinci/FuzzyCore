@@ -6,10 +6,11 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using FuzzyCore.Server;
 
-namespace FuzzyCore.Server.Commands
+namespace FuzzyCore.Commands
 {
-    class GetFile
+    public class GetFile
     {
         ConsoleMessage Message = new ConsoleMessage();
         public void GetFileBytes(Data.JsonCommand Command)

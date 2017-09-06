@@ -1,15 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MongoDB.Bson.IO;
-using MongoDB.Bson.Serialization;
-using MongoDB.Driver.Linq;
-using MongoDB.Driver;
-using MongoDB.Driver.GeoJsonObjectModel;
 using MongoDB.Bson;
 using FuzzyCore.Server;
+using MongoDB.Driver;
 
 namespace FuzzyCore.Database
 {

@@ -5,12 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.IO;
-using FuzzyCore.Server.Data;
+using FuzzyCore.Data;
 using System.Threading;
 
-namespace FuzzyCore.Server.Commands
+namespace FuzzyCore.Commands
 {
-    class OpenProgram
+    public class OpenProgram
     {
         List<Programs> Progs;
         JsonCommand Comm;
