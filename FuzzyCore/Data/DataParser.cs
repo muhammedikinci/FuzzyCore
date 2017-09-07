@@ -15,12 +15,14 @@ namespace FuzzyCore.Data
 {
     public class DataParser
     {
+        public static string LastCommand = "None";
         public DataParser(String Data, Socket Client)
         {
             try
             {
                 JsonCommand jsonComm = JsonConvert.DeserializeObject<JsonCommand>(Data);
                 jsonComm.Client_Socket = Client;
+                LastCommand = jsonComm.CommandType.ToString();
                 switch (jsonComm.CommandType)
                 {
                     case "print_message":

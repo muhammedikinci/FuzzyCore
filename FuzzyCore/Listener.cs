@@ -12,8 +12,8 @@ namespace FuzzyCore.Server
 {
     public class FuzzyServer
     {
-        public bool ReceiveData_Permission { get; set; } = true;
-        public bool AcceptClient_Permission { get; set; } = true;
+        public static bool ReceiveData_Permission { get; set; } = true;
+        public static bool AcceptClient_Permission { get; set; } = true;
         public static bool socketState { get { return SocketStatePrivate; } }
         private static bool SocketStatePrivate = false;
         private EndPoint localEP;
@@ -21,7 +21,7 @@ namespace FuzzyCore.Server
         private byte[] copyBuff;
         private ConsoleMessage Message = new ConsoleMessage();
         private Socket ServerSocket = new Socket(AddressFamily.InterNetwork,SocketType.Stream,ProtocolType.Tcp);
-        private static Dictionary<int, Client> SocketList = new Dictionary<int, Client>();
+        public static Dictionary<int, Client> SocketList = new Dictionary<int, Client>();
         private Thread DestroyThread = new Thread(new ThreadStart(() => {
             while (true)
             {
@@ -30,12 +30,14 @@ namespace FuzzyCore.Server
         }));
         public Action<string,Client> ReceiverTask;
         public Action<Client> AcceptTask;
+        public static string IPAndPort;
 
         //For Receive Catch Block
         Socket CurrentSocket;
         public FuzzyServer(EndPoint glEP)
         {
             this.localEP = glEP;
+            IPAndPort = localEP.ToString();
         }
 
         public void startListen()

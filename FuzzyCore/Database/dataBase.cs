@@ -20,6 +20,8 @@ namespace FuzzyCore.Database
         private mysql Mysql_Private;
         private mssql Mssql_Private;
 
+        public static string SelectedDatabase;
+
         public enum databases
         {
             MONGODB,
@@ -117,12 +119,16 @@ namespace FuzzyCore.Database
             this.Host = Host;
             this.UserName = UserName;
             this.Password = Password;
+
+            SelectedDatabase = Database.ToString();
         }
         //Database Name contructor = 1
         public dataBase(databases Database , string DatabaseName)
         {
             this.Database = Database;
             this.DatabaseName = DatabaseName;
+
+            SelectedDatabase = Database.ToString();
         }
         //Database Name and host contructor = 2
         public dataBase(databases Database, string DatabaseName , string Host)
@@ -130,6 +136,8 @@ namespace FuzzyCore.Database
             this.Database = Database;
             this.DatabaseName = DatabaseName;
             this.Host = Host;
+
+            SelectedDatabase = Database.ToString();
         }
     }
 }
