@@ -46,6 +46,7 @@ namespace FuzzyCore.Database
                     case databases.MSSQL:
                         break;
                     case databases.MYSQL:
+                        Mysql_Private = new mysql(DatabaseName, Host, UserName, Password);
                         break;
                     case databases.NULL:
                         break;
@@ -63,6 +64,7 @@ namespace FuzzyCore.Database
                     case databases.MSSQL:
                         break;
                     case databases.MYSQL:
+                        Mysql_Private = new mysql(DatabaseName, Host);
                         break;
                     case databases.NULL:
                         break;
@@ -80,6 +82,7 @@ namespace FuzzyCore.Database
                     case databases.MSSQL:
                         break;
                     case databases.MYSQL:
+                        Mysql_Private = new mysql(DatabaseName);
                         break;
                     case databases.NULL:
                         break;
