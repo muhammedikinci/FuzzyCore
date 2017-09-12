@@ -1,5 +1,37 @@
 # FuzzyCore
-Remote Control for Buisness
+>Remote Control for Buisness
+
+### Quick Start
+```c#
+using System;
+using FuzzyCore.Server;
+using FuzzyCore.Initialize;
+
+namespace TT
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            ConsoleMessage message = new ConsoleMessage();
+            Init FuzzyInit = new Init("Program.json",Accept,Receive,"127.0.0.1","111");
+            if (FuzzyServer.socketState)
+            {
+                message.Write("Listening! -> "+FuzzyServer.IPAndPort,ConsoleMessage.MessageType.BACKPROCESS);
+            }
+            Console.ReadLine();
+        }
+        static void Accept(Client cl)
+        {
+
+        }
+        static void Receive(string str, Client cl)
+        {
+
+        }
+    }
+}
+```
 
 [Simple Main Project](https://github.com/muhammedikinci/FuzzyCore/wiki/Main-Project-Simple)
 
