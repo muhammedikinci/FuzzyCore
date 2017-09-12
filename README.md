@@ -14,7 +14,7 @@ Remote Control for Buisness
 
 <h3>For Open Program Command Json File</h3>
 
-<b>Programs.json</b> <span> - add to main project (deployment)bin/debug</span>
+<b>Program.json</b> <span> - add to main project (deployment)bin/debug</span>
 ```json
 ﻿[
   {
