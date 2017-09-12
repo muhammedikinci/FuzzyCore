@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using System.IO;
 using FuzzyCore.Data;
 using System.Threading;
+using FuzzyCore.Initialize;
 
 namespace FuzzyCore.Commands
 {
@@ -17,7 +18,7 @@ namespace FuzzyCore.Commands
         int CurrentProgramIndex;
         private void OpenJson()
         {
-            using (StreamReader Reader = new StreamReader("Programs.json"))
+            using (StreamReader Reader = new StreamReader(Init.ProgramJsonPath))
             {
                 string ProgramsJson = Reader.ReadToEnd();
                 Progs = JsonConvert.DeserializeObject<List<Programs>>(ProgramsJson);

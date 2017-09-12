@@ -91,6 +91,7 @@
     <Compile Include="Database\User.cs" />
     <Compile Include="Data\DataParser.cs" />
     <Compile Include="Data\JsonCommand.cs" />
+    <Compile Include="Initialize\Init.cs" />
     <Compile Include="Listener.cs" />
     <Compile Include="Pattern\Command.cs" />
     <Compile Include="Pattern\Invoker.cs" />

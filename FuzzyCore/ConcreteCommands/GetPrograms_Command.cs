@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FuzzyCore.Data;
 using FuzzyCore.Commands;
+using Newtonsoft.Json;
 
 namespace FuzzyCore.Server
 {
@@ -16,7 +17,15 @@ namespace FuzzyCore.Server
 
         public override void Execute()
         {
-            Console.WriteLine(Comm.CommandType);
+            OpenProgram Program = new OpenProgram(Comm);
+            string[] list = Program.getProgramList();
+            foreach (string item in list)
+            {
+                JsonCommand CurrentCommand = new JsonCommand();
+                CurrentCommand.CommandType = "program_name";
+                CurrentCommand.Text = item;
+                Comm.Client_Socket.Send(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(CurrentCommand)));
+            }
         }
     }
 }
