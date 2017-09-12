@@ -12,14 +12,14 @@ Remote Control for Buisness
 [Service Example](https://github.com/muhammedikinci/FuzzyCore/wiki/Service-Examples)
 
 
-# For Open Program Command Json File
+<h3>For Open Program Command Json File</h3>
 
-<b>Program.json</b>
+<b>Program.json</b> <span> - add to main project (deployment)bin/debug</span>
 ```json
 ﻿[
   {
     "ProgramName": "Spotify",
-    "Path": "C:\\Users\\muham\\AppData\\Roaming\\Spotify\\Spotify.exe",
+    "Path": "C:\\Users\\exampleUser\\AppData\\Roaming\\Spotify\\Spotify.exe",
     "KillName": "Spotify"
   },
   {
