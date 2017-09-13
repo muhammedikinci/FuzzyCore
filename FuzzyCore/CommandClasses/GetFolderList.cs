@@ -56,7 +56,7 @@ namespace FuzzyCore.Commands
         {
             try
             {
-                Thread.Sleep(100);
+                Thread.Sleep(10);
                 byte[] arr = Encoding.UTF8.GetBytes(Data);
                 Client.Send(arr);
             }

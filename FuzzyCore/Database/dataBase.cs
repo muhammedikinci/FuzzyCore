@@ -37,7 +37,7 @@ namespace FuzzyCore.Database
             if (stat == 0)
             {
                 Message.Write("Selected database : " + Database, Server.ConsoleMessage.MessageType.BACKPROCESS);
-                Message.Write("Initializing", Server.ConsoleMessage.MessageType.BACKPROCESS);
+                Message.Write("Initializing Database", Server.ConsoleMessage.MessageType.BACKPROCESS);
                 switch (Database)
                 {
                     case databases.MONGODB:
@@ -55,7 +55,7 @@ namespace FuzzyCore.Database
             else if (stat == 1)
             {
                 Message.Write("Selected database : " + Database, Server.ConsoleMessage.MessageType.BACKPROCESS);
-                Message.Write("Initializing", Server.ConsoleMessage.MessageType.BACKPROCESS);
+                Message.Write("Initializing Database", Server.ConsoleMessage.MessageType.BACKPROCESS);
                 switch (Database)
                 {
                     case databases.MONGODB:
@@ -73,7 +73,7 @@ namespace FuzzyCore.Database
             else if (stat == 2)
             {
                 Message.Write("Selected database : " + Database, Server.ConsoleMessage.MessageType.BACKPROCESS);
-                Message.Write("Initializing", Server.ConsoleMessage.MessageType.BACKPROCESS);
+                Message.Write("Initializing Database", Server.ConsoleMessage.MessageType.BACKPROCESS);
                 switch (Database)
                 {
                     case databases.MONGODB:
