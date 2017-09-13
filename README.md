@@ -1,7 +1,7 @@
 # FuzzyCore
 >Remote Control for Buisness
 
-### Quick Start
+### Quick Start - Alternavite 1
 ```c#
 using System;
 using FuzzyCore.Server;
@@ -28,6 +28,30 @@ namespace TT
         static void Receive(string str, Client cl)
         {
 
+        }
+    }
+}
+```
+
+### Quick Start - Alternavite 2
+```c#
+using System;
+using FuzzyCore.Server;
+using FuzzyCore.Initialize;
+
+namespace TT
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            ConsoleMessage message = new ConsoleMessage();
+            Init FuzzyInit = new Init();
+            if (FuzzyServer.socketState)
+            {
+                message.Write("Listening! -> "+FuzzyServer.IPAndPort,ConsoleMessage.MessageType.BACKPROCESS);
+            }
+            Console.ReadLine();
         }
     }
 }
