@@ -90,6 +90,7 @@
     <Compile Include="Database\mysql.cs" />
     <Compile Include="Database\User.cs" />
     <Compile Include="Data\DataParser.cs" />
+    <Compile Include="Data\DataSerializer.cs" />
     <Compile Include="Data\JsonCommand.cs" />
     <Compile Include="Initialize\Init.cs" />
     <Compile Include="Listener.cs" />

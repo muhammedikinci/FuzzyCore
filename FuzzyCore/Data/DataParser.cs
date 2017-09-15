@@ -16,13 +16,25 @@ namespace FuzzyCore.Data
     public class DataParser
     {
         public static string LastCommand = "None";
+        JsonCommand jsonComm;
         public DataParser(String Data, Socket Client)
         {
             try
             {
-                JsonCommand jsonComm = JsonConvert.DeserializeObject<JsonCommand>(Data);
-                jsonComm.Client_Socket = Client;
-                LastCommand = jsonComm.CommandType.ToString();
+                DataSerializer ds = new DataSerializer();
+                string a = ds.Serialize(Data);
+                if (a == "WAIT_NEXT_DATA")
+                {
+                    jsonComm.CommandType = "WAIT_NEXT_DATA";
+                    jsonComm.Client_Socket = Client;
+                    LastCommand = jsonComm.CommandType.ToString();
+                }
+                else
+                {
+                    jsonComm = JsonConvert.DeserializeObject<JsonCommand>(a);
+                    jsonComm.Client_Socket = Client;
+                    LastCommand = jsonComm.CommandType.ToString();
+                }
                 switch (jsonComm.CommandType)
                 {
                     case "print_message":
@@ -90,7 +102,7 @@ namespace FuzzyCore.Data
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.Message + ex.Source.ToString());
             }
         }
     }

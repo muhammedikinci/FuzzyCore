@@ -48,6 +48,7 @@ namespace FuzzyCore.Commands
             catch (Exception ex)
             {
                 message.Write(ex.Message.ToString(), ConsoleMessage.MessageType.ERROR);
+                Console.WriteLine("GetFolderList->GetFoldersName");
             }
         }
 
@@ -56,13 +57,14 @@ namespace FuzzyCore.Commands
         {
             try
             {
-                Thread.Sleep(10);
+                //Thread.Sleep(10);
                 byte[] arr = Encoding.UTF8.GetBytes(Data);
                 Client.Send(arr);
             }
             catch (Exception ex)
             {
                 message.Write(ex.Message,ConsoleMessage.MessageType.ERROR);
+                Console.WriteLine("GetFolderList->SendDataString");
             }
         }
         public void SendDataArray(byte[] Data, Socket Client)
@@ -75,6 +77,7 @@ namespace FuzzyCore.Commands
             catch (Exception ex)
             {
                 message.Write(ex.Message, ConsoleMessage.MessageType.ERROR);
+                Console.WriteLine("GetFolderList->SendDataArray");
             }
         }
     }

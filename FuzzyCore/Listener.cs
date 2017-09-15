@@ -117,7 +117,10 @@ namespace FuzzyCore.Server
                 Thread AcceptTaskTh = new Thread(new ThreadStart(() => {
                     AcceptTask(CurrentClient);
                 }));
-                AcceptTaskTh.Start();
+                if (AcceptTask != null)
+                {
+                    AcceptTaskTh.Start();
+                }
 
                 //Add created client to socket list
                 SocketList.Add(CurrentClientId, CurrentClient);
@@ -157,7 +160,10 @@ namespace FuzzyCore.Server
                 {
                     DataParser parser = new DataParser(Data, CurrentSocket);
                     Thread reciveTask = new Thread(new ThreadStart(() => { ReceiverTask(Data, GetClientBySocket(CurrentSocket)); }));
-                    reciveTask.Start();
+                    if (ReceiverTask != null)
+                    {
+                        reciveTask.Start();
+                    }
                     CurrentSocket.BeginReceive(_buff, 0, _buff.Length, SocketFlags.None, new AsyncCallback(ReceiveData), CurrentSocket);
                 }
                 else
