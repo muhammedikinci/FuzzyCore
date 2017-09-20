@@ -12,16 +12,33 @@ namespace FuzzyCore.Server
 {
     public class FuzzyServer
     {
-        public static bool ReceiveData_Permission { get; set; } = true;
-        public static bool AcceptClient_Permission { get; set; } = true;
-        public static bool socketState { get { return SocketStatePrivate; } }
-        private static bool SocketStatePrivate = false;
-        private EndPoint localEP;
+        //
+        //BOOL
+        //
+        public static bool ReceiveData_Permission { get; set; } = true; //Data receiving control
+        public static bool AcceptClient_Permission { get; set; } = true; //Client accepting control
+        public static bool socketState { get { return SocketStatePrivate; } } //Socket Open/Close control get property
+        private static bool SocketStatePrivate = false; //Socket Open/Close Control
+
+        //
+        //BYTE
+        //
         private byte[] _buff = new byte[1024];
         private byte[] copyBuff;
-        private ConsoleMessage Message = new ConsoleMessage();
+
+        //
+        //LISTENER VARS
+        //
         private Socket ServerSocket = new Socket(AddressFamily.InterNetwork,SocketType.Stream,ProtocolType.Tcp);
         public static Dictionary<int, Client> SocketList = new Dictionary<int, Client>();
+        private ConsoleMessage Message = new ConsoleMessage();
+        public static string IPAndPort;
+        private EndPoint localEP;
+        Socket CurrentSocket;
+
+        //
+        //THREADS AND METHODS
+        //
         private Thread DestroyThread = new Thread(new ThreadStart(() => {
             while (true)
             {
@@ -30,20 +47,26 @@ namespace FuzzyCore.Server
         }));
         public Action<string,Client> ReceiverTask;
         public Action<Client> AcceptTask;
-        public static string IPAndPort;
 
-        //For Receive Catch Block
-        Socket CurrentSocket;
+        //
+        //CONSTRUCTOR
+        //
         public FuzzyServer(EndPoint glEP)
         {
             this.localEP = glEP;
             IPAndPort = localEP.ToString();
         }
 
+        //
+        //STARTER METHOD
+        //
         public void startListen()
         {
             try
             {
+                //
+                //PERMISSION TRUE/FALSE CONTROL
+                //
                 if (!AcceptClient_Permission)
                 {
                     throw new Exception("Accept Client Permission Is False");

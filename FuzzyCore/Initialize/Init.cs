@@ -61,11 +61,14 @@ namespace FuzzyCore.Initialize
         public Init()
         {
             Message.Write("Basic Initializing",ConsoleMessage.MessageType.BACKPROCESS);
-            Message.Write("WCF Service is Running", ConsoleMessage.MessageType.BACKPROCESS);
             ProgramJsonPath = "Program.json";
             Host = new ServiceHost(typeof(Services.FuzzyService));
             Host.Open();
-            Server = new FuzzyServer(new IPEndPoint(IPAddress.Any,111));
+            if (Host.State == CommunicationState.Opened)
+            {
+                Message.Write("WCF Service is Running", ConsoleMessage.MessageType.BACKPROCESS);
+            }
+            Server = new FuzzyServer(new IPEndPoint(IPAddress.Any,5959));
             Server.startListen();
         }
     }

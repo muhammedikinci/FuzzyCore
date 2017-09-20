@@ -1,18 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization;
-using System.ServiceModel;
-using System.Text;
+using FuzzyCore.Server;
 
 namespace FuzzyCore.Services
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "ServerStatusService" in both code and config file together.
     public class FuzzyService : IFuzzyService
     {
         public int GetClientCount()
         {
-            return Server.FuzzyServer.SocketList.Count();
+            return FuzzyServer.SocketList.Count();
         }
 
         public string GetLastCommand()
@@ -22,7 +19,7 @@ namespace FuzzyCore.Services
 
         public string GetListeningIPAndPort()
         {
-            return Server.FuzzyServer.IPAndPort;
+            return FuzzyServer.IPAndPort;
         }
 
         public string GetSelectedDatabase()
@@ -32,17 +29,29 @@ namespace FuzzyCore.Services
 
         public bool GetServerStatus()
         {
-            return Server.FuzzyServer.socketState;
+            return FuzzyServer.socketState;
         }
 
-        public bool WorkingAcceptTask()
+        public bool AcceptTaskStatus()
         {
-            return Server.FuzzyServer.AcceptClient_Permission;
+            return FuzzyServer.AcceptClient_Permission;
         }
 
-        public bool WorkingReceiveTask()
+        public bool ReceiveTaskStatus()
         {
-            return Server.FuzzyServer.ReceiveData_Permission;
+            return FuzzyServer.ReceiveData_Permission;
+        }
+
+        public bool SetAcceptTask(bool TaskStatus)
+        {
+            FuzzyServer.AcceptClient_Permission = TaskStatus;
+            return FuzzyServer.AcceptClient_Permission;
+        }
+
+        public bool SetReceiveTask(bool TaskStatus)
+        {
+            FuzzyServer.ReceiveData_Permission = TaskStatus;
+            return FuzzyServer.ReceiveData_Permission;
         }
     }
 }

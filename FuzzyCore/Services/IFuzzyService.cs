@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FuzzyCore.Server;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -7,7 +8,6 @@ using System.Text;
 
 namespace FuzzyCore.Services
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "IServerStatusService" in both code and config file together.
     [ServiceContract]
     public interface IFuzzyService
     {
@@ -22,8 +22,12 @@ namespace FuzzyCore.Services
         [OperationContract]
         string GetLastCommand();
         [OperationContract]
-        bool WorkingAcceptTask();
+        bool AcceptTaskStatus();
         [OperationContract]
-        bool WorkingReceiveTask();
+        bool ReceiveTaskStatus();
+        [OperationContract]
+        bool SetAcceptTask(bool TaskStatus);
+        [OperationContract]
+        bool SetReceiveTask(bool TaskStatus);
     }
 }
