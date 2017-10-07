@@ -95,3 +95,39 @@ namespace TT
   }
 ]
 ```
+
+### Out DataParser for your commands
+```c#
+static void Main(string[] args)
+        {
+            ConsoleMessage message = new ConsoleMessage();
+            Init FuzzyInit = new Init();
+            DataParser.OutParser = OutParser;
+            DataParser.OutParserPermission = true;
+            if (FuzzyServer.socketState)
+            {
+                message.Write("Listening! -> "+FuzzyServer.IPAndPort,ConsoleMessage.MessageType.BACKPROCESS);
+            }
+            dataBase db = new dataBase(dataBase.databases.MONGODB, "NetworkApp");
+            db.init();
+            Console.ReadLine();
+        }
+        static void OutParser(JsonCommand Comm)
+        {
+            if (Comm.CommandType == "run_my_command")
+            {
+                MyCommand myConcreteCommand = new MyCommand(Comm);
+                Invoker ınv = new Invoker(myConcreteCommand);
+                ınv.Execute();
+            }
+        }
+        static void Accept(Client cl)
+        {
+
+        }
+        static void Receive(string str, Client cl)
+        {
+
+        }
+```
+![Example Result](https://image.prntscr.com/image/Vu4EWxinQSSSHRDndG46mA.png)
