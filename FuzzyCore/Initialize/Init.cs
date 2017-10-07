@@ -3,6 +3,7 @@ using FuzzyCore.Server;
 using System.Net;
 using System.ServiceModel;
 using System.IO;
+using System.Collections.Generic;
 
 namespace FuzzyCore.Initialize
 {

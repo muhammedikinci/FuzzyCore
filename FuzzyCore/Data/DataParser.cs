@@ -10,6 +10,8 @@ using System.Net.Sockets;
 using System.Net;
 using System.Diagnostics;
 using System.Threading;
+using System.IO;
+using System.Reflection;
 
 namespace FuzzyCore.Data
 {
@@ -17,6 +19,8 @@ namespace FuzzyCore.Data
     {
         public static string LastCommand = "None";
         JsonCommand jsonComm;
+        public static bool OutParserPermission = false;
+        public static Action<JsonCommand> OutParser;
         public DataParser(String Data, Socket Client)
         {
             try
@@ -95,7 +99,10 @@ namespace FuzzyCore.Data
                         }
                     default:
                         {
-                            Console.WriteLine("Null Command");
+                            if (OutParserPermission)
+                            {
+                                OutParser(jsonComm);
+                            }
                             break;
                         }
                 }
