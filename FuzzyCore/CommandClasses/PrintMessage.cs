@@ -41,7 +41,18 @@ namespace FuzzyCore.Commands
         public PrintMessage(JsonCommand comm)
         {
             this.Command = comm;
-            DataProcess();
+            Permissions.MacPermission.PermissionMac Mac = new Permissions.MacPermission.PermissionMac();
+            Mac.MacAddress = comm.MacAddress;
+            Permissions.MacPermission MacPer = new Permissions.MacPermission();
+            MacPer.MacObject = Mac;
+            if (MacPer.PermissionControl())
+            {
+                DataProcess();
+            }
+            else
+            {
+                Console.WriteLine("Permission Denied!");
+            }
         }
 
         void DataProcess()

@@ -24,5 +24,6 @@ namespace FuzzyCore.Data
         public String PrevDirectory { get; set; }
 
         public Socket Client_Socket { get; set; }
+        public string MacAddress { get; set; }
     }
 }

@@ -23,6 +23,7 @@ namespace FuzzyCore.Initialize
                 return Host;
             }
         }
+
         public static String ProgramJsonPath;
         ConsoleMessage Message = new ConsoleMessage();
         FuzzyServer Server;

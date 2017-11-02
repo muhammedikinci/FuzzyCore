@@ -21,6 +21,7 @@ namespace FuzzyCore.Data
         JsonCommand jsonComm;
         public static bool OutParserPermission = false;
         public static Action<JsonCommand> OutParser;
+        Invoker INV;
         public DataParser(String Data, Socket Client)
         {
             try
@@ -45,56 +46,56 @@ namespace FuzzyCore.Data
                         {
                             PrintMessage_Command PrintMessageComm = new PrintMessage_Command(jsonComm);
                             Command Comm = PrintMessageComm;
-                            Invoker Inv = new Invoker(Comm);
-                            Inv.Execute();
+                            INV = new Invoker(Comm);
+                            INV.Execute();
                             break;
                         }
                     case "open_program":
                         {
                             ProgramOpen_Command ProgramOpenCommand = new ProgramOpen_Command(jsonComm);
                             Command Comm = ProgramOpenCommand;
-                            Invoker Inv = new Invoker(Comm);
-                            Inv.Execute();
+                            INV = new Invoker(Comm);
+                            INV.Execute();
                             break;
                         }
                     case "get_folder_list":
                         {
                             GetFolderList_Command GetFolderListCommand = new GetFolderList_Command(jsonComm);
                             Command Comm = GetFolderListCommand;
-                            Invoker Inv = new Invoker(Comm);
-                            Inv.Execute();
+                            INV = new Invoker(Comm);
+                            INV.Execute();
                             break;
                         }
                     case "get_file":
                         {
                             GetFile_Command GetFileCommand = new GetFile_Command(jsonComm);
                             Command Comm = GetFileCommand;
-                            Invoker Inv = new Invoker(Comm);
-                            Inv.Execute();
+                            INV = new Invoker(Comm);
+                            INV.Execute();
                             break;
                         }
                     case "get_programs":
                         {
                             GetPrograms_Command GetProgramsCommand = new GetPrograms_Command(jsonComm);
                             Command Comm = GetProgramsCommand;
-                            Invoker Inv = new Invoker(Comm);
-                            Inv.Execute();
+                            INV = new Invoker(Comm);
+                            INV.Execute();
                             break;
                         }
                     case "get_processes":
                         {
                             GetProcesses_Command GetProcessesCommand = new GetProcesses_Command(jsonComm);
                             Command Comm = GetProcessesCommand;
-                            Invoker Inv = new Invoker(Comm);
-                            Inv.Execute();
+                            INV = new Invoker(Comm);
+                            INV.Execute();
                             break;
                         }
                     case "process_kill":
                         {
                             ProcessKill_Command ProcessKillCommand = new ProcessKill_Command(jsonComm);
                             Command Comm = ProcessKillCommand;
-                            Invoker Inv = new Invoker(Comm);
-                            Inv.Execute();
+                            INV = new Invoker(Comm);
+                            INV.Execute();
                             break;
                         }
                     default:
