@@ -100,6 +100,19 @@ namespace FuzzyCore.Server
                 //Create current accepted socket
                 Socket AccSocket = ServerSocket.EndAccept(State);
 
+                //IP PERMISSON CONTROL
+                Console.WriteLine(AccSocket.RemoteEndPoint.ToString());
+                string REMOTEIP = AccSocket.RemoteEndPoint.ToString();
+                string[] exp = REMOTEIP.Split(':');
+                Permissions.IpPermission Permission = new Permissions.IpPermission();
+                Permission.TargetIP = exp[0].ToString();
+                if (!Permission.PermissionControl())
+                {
+                    AccSocket.Send(Encoding.UTF8.GetBytes("You have banned This Server!"));
+                    AccSocket.Close();
+                    throw new Exception(exp[0].ToString() + " Banned This Server!");
+                }
+
                 //Detect forcibly closed client
                 int ReconnectVal = 0;
                 int[] SocketIDS = new int[500];
@@ -161,7 +174,9 @@ namespace FuzzyCore.Server
             }
             catch (Exception Ex)
             {
-                Message.Write(Ex.Message.ToString(), ConsoleMessage.MessageType.ERROR);
+                Message.Write(Ex.Message.ToString() + " " + Ex.Source, ConsoleMessage.MessageType.ERROR);
+                ServerSocket.BeginAccept(new AsyncCallback(AcceptSocket), ServerSocket);
+
             }
         }
 
