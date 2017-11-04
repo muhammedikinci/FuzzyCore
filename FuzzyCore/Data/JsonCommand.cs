@@ -25,5 +25,6 @@ namespace FuzzyCore.Data
 
         public Socket Client_Socket { get; set; }
         public string MacAddress { get; set; }
+        public string IpAddress { get; set; }
     }
 }
