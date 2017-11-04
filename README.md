@@ -95,6 +95,36 @@ namespace TT
   }
 ]
 ```
+<h3>Permissions Example : MacPermission</h3>
+
+<b>Mac.json</b> <span> - add to main project (deployment)bin/debug/Permissions</span>
+```json
+[
+  {
+    "MacAddress": "heheh",
+    "Permission": "YES"
+  },
+  {
+    "MacAddress": "nope",
+    "Permission": "NO"
+  }
+]
+```
+<h3>IpPermission</h3>
+
+<b>Ip.json</b> <span> - add to main project (deployment)bin/debug/Permissions</span>
+```json
+[
+  {
+    "IpAddress": "0.0.0.0",
+    "Permission": "YES"
+  },
+  {
+    "IpAddress": "127.0.0.1",
+    "Permission": "NO"
+  }
+]
+```
 
 ### Out DataParser for your commands
 ```c#
