@@ -1,17 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
 using FuzzyCore.Server;
 using FuzzyCore.Commands;
 using System.Net.Sockets;
-using System.Net;
-using System.Diagnostics;
-using System.Threading;
-using System.IO;
-using System.Reflection;
 
 namespace FuzzyCore.Data
 {
@@ -22,7 +13,27 @@ namespace FuzzyCore.Data
         public static bool OutParserPermission = false;
         public static Action<JsonCommand> OutParser;
         Invoker INV;
-        public DataParser(String Data, Socket Client)
+        String Data;
+        Socket Client;
+        Initialize.InitType Type;
+        public DataParser(String Data, Socket Client, Initialize.InitType Type)
+        {
+            this.Data = Data;
+            this.Client = Client;
+            this.Type = Type;
+        }
+        public void Parse()
+        {
+            if (Type.ServerProp.TYPE == Initialize.Props.ServerType.REMOTING)
+            {
+                Remoting();
+            }
+            else if (Type.ServerProp.TYPE == Initialize.Props.ServerType.DATATRANFSER)
+            {
+
+            }
+        }
+        void Remoting()
         {
             try
             {
