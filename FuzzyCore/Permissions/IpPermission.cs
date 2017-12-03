@@ -12,7 +12,7 @@ namespace FuzzyCore.Permissions
 
         public string FileContent { get; set; }
 
-        public string FilePath { get { return "Permissions\\Ip.json"; } set { } }
+        public string FilePath { get; set; }
 
         public bool FileControl()
         {
@@ -22,22 +22,37 @@ namespace FuzzyCore.Permissions
         public bool PermissionControl()
         {
             Serialize();
-            for (int i = 0; i < Objects.Count; i++)
+            try
             {
-                if (Objects[i].IPAddress == TargetIP)
+                if (Objects.Count > 0)
                 {
-                    switch (Objects[i].Permission)
+                    for (int i = 0; i < Objects.Count; i++)
                     {
-                        case "YES":
-                            return true;
-                        case "NO":
-                            return false;
-                        default:
-                            return false;
+                        if (Objects[i].IPAddress == TargetIP)
+                        {
+                            switch (Objects[i].Permission)
+                            {
+                                case "YES":
+                                    return true;
+                                case "NO":
+                                    return false;
+                                default:
+                                    return false;
+                            }
+                        }
                     }
                 }
+                else
+                {
+                    return true;
+                }
+                return false;
             }
-            return false;
+            catch (Exception ex)
+            {
+                Server.ConsoleMessage.WriteException(ex.Message,"IpPermission","PermissionControl");
+                return true;
+            }
         }
 
         public void Serialize()
