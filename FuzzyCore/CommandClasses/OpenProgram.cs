@@ -18,7 +18,7 @@ namespace FuzzyCore.Commands
         int CurrentProgramIndex;
         private void OpenJson()
         {
-            using (StreamReader Reader = new StreamReader(Init.ProgramJsonPath))
+            using (StreamReader Reader = new StreamReader(staticInitData.Current_Init_Type.Paths.ProgramJson))
             {
                 string ProgramsJson = Reader.ReadToEnd();
                 Progs = JsonConvert.DeserializeObject<List<Programs>>(ProgramsJson);
