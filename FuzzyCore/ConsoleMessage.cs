@@ -22,46 +22,56 @@ namespace FuzzyCore.Server
         {
             if (mType == MessageType.ERROR)
             {
-                Console.ForegroundColor = ConsoleColor.Red;
+                //Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("ERROR : " + Message);
-                Console.ForegroundColor = ConsoleColor.Gray;
+                //Console.ForegroundColor = ConsoleColor.Gray;
             }
             else if (mType == MessageType.SUCCESS)
             {
-                Console.ForegroundColor = ConsoleColor.Green;
+                //Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("SUCCESS : " + Message);
-                Console.ForegroundColor = ConsoleColor.Gray;
+                //Console.ForegroundColor = ConsoleColor.Gray;
             }
             else if (mType == MessageType.CONNECT)
             {
-                Console.ForegroundColor = ConsoleColor.Green;
+                //Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("CONNECT : " + Message);
-                Console.ForegroundColor = ConsoleColor.Gray;
+                //Console.ForegroundColor = ConsoleColor.Gray;
             }
             else if (mType == MessageType.DISCONNECT)
             {
-                Console.BackgroundColor = ConsoleColor.Red;
+                //Console.BackgroundColor = ConsoleColor.Red;
                 Console.WriteLine("DISCONNECT : " + Message);
-                Console.BackgroundColor = ConsoleColor.Gray;
+                //Console.BackgroundColor = ConsoleColor.Gray;
             }
             else if (mType == MessageType.NORMAL)
             {
-                Console.ForegroundColor = ConsoleColor.Gray;
+                //Console.ForegroundColor = ConsoleColor.Gray;
                 Console.WriteLine("MESSAGE : " + Message);
-                Console.ForegroundColor = ConsoleColor.Gray;
+                //Console.ForegroundColor = ConsoleColor.Gray;
             }
             else if (mType == MessageType.PROCESS)
             {
-                Console.ForegroundColor = ConsoleColor.Red;
+                //Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine(Message);
-                Console.ForegroundColor = ConsoleColor.Gray;
+                //Console.ForegroundColor = ConsoleColor.Gray;
             }
             else if (mType == MessageType.BACKPROCESS)
             {
-                Console.BackgroundColor = ConsoleColor.DarkBlue;
+                //Console.BackgroundColor = ConsoleColor.DarkBlue;
                 Console.WriteLine(Message);
-                Console.BackgroundColor = ConsoleColor.Black;
+                //Console.BackgroundColor = ConsoleColor.Black;
             }
+        }
+        public static void WriteException(string ErrorMessage,string FileName,string MethodName)
+        {
+            string Msg = String.Format(
+                "Error Message : {0} \n"+
+                "File Name : {1} \n"+
+                "MethodName : {2}",
+                ErrorMessage,FileName,MethodName
+                );
+            Console.WriteLine(Msg);
         }
     }
 }
