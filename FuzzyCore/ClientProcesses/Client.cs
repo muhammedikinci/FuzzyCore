@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ namespace FuzzyCore.Server
     {
         public int ID { get; set; }
         public Socket SOCKET { get; set; }
+        public IPEndPoint UDP_Socket { get; set; }
         public string LASTCONNECTIONTIME { get; set; }
         public ClosedStates CLOSEDSTATE { get; set; }
         public int PROCESS { get; set; }
