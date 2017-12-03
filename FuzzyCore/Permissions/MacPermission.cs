@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using FuzzyCore.Initialize;
 using Newtonsoft.Json;
 
 namespace FuzzyCore.Permissions
@@ -12,7 +10,7 @@ namespace FuzzyCore.Permissions
     {
         public string FileContent { get; set; }
 
-        public string FilePath { get { return "Permissions\\Mac.json"; } set { } }
+        public string FilePath { get; set; }
 
         public List<PermissionMac> JsonObject { get; set; }
 
@@ -26,22 +24,37 @@ namespace FuzzyCore.Permissions
         public bool PermissionControl()
         {
             Serialize();
-            for (int i = 0; i < JsonObject.Count; i++)
+            try
             {
-                if (JsonObject[i].MacAddress == MacObject.MacAddress)
+                if (JsonObject.Count > 0)
                 {
-                    switch (JsonObject[i].Permission)
+                    for (int i = 0; i < JsonObject.Count; i++)
                     {
-                        case "YES":
-                            return true;
-                        case "NO":
-                            return false;
-                        default:
-                            return false;
+                        if (JsonObject[i].MacAddress == MacObject.MacAddress)
+                        {
+                            switch (JsonObject[i].Permission)
+                            {
+                                case "YES":
+                                    return true;
+                                case "NO":
+                                    return false;
+                                default:
+                                    return false;
+                            }
+                        }
                     }
                 }
+                else
+                {
+                    return true;
+                }
+                return false;
             }
-            return false;
+            catch (Exception ex)
+            {
+                Server.ConsoleMessage.WriteException(ex.Message, "MacPermission", "PermissionControl");
+                return true;
+            }
         }
 
         public void Serialize()

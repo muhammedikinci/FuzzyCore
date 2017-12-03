@@ -91,9 +91,15 @@
     <Compile Include="Database\User.cs" />
     <Compile Include="Data\DataParser.cs" />
     <Compile Include="Data\DataSerializer.cs" />
+    <Compile Include="Data\Game\GameCommander.cs" />
+    <Compile Include="Data\Game\GameCommandObject.cs" />
     <Compile Include="Data\JsonCommand.cs" />
+    <Compile Include="Initialize\ConfigReader.cs" />
     <Compile Include="Initialize\Init.cs" />
-    <Compile Include="Listener.cs" />
+    <Compile Include="Initialize\ServerProperties.cs" />
+    <Compile Include="Initialize\staticInitData.cs" />
+    <Compile Include="Server\GameListener.cs" />
+    <Compile Include="Server\Listener.cs" />
     <Compile Include="Pattern\Command.cs" />
     <Compile Include="Pattern\Invoker.cs" />
     <Compile Include="Permissions\IPermission.cs" />
