@@ -19,7 +19,7 @@ namespace FuzzyCore.Commands
         }
         bool FileControl()
         {
-            FileInfo mfileInfo = new FileInfo(FilePath);
+            FileInfo mfileInfo = new FileInfo(FilePath + "/" + FileName);
             return mfileInfo.Exists;
         }
         public byte[] GetFileBytes()
