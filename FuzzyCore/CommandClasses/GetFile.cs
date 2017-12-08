@@ -1,45 +1,43 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using FuzzyCore.Data;
 using FuzzyCore.Server;
+using System;
+using System.IO;
 
 namespace FuzzyCore.Commands
 {
     public class GetFile
     {
         ConsoleMessage Message = new ConsoleMessage();
-        public void GetFileBytes(Data.JsonCommand Command)
+        private String FilePath;
+        private String FileName;
+        private JsonCommand mCommand;
+        public GetFile(Data.JsonCommand Command)
         {
-            try
-            {
-                byte[] file = File.ReadAllBytes(Command.FilePath + "\\" + Command.Text);
-                if (file.Length > 0)
-                {
-                    SendDataArray(file, Command.Client_Socket);
-                    Message.Write(Command.CommandType,ConsoleMessage.MessageType.SUCCESS);
-                }
-            }
-            catch (Exception ex)
-            {
-                Message.Write(ex.Message, ConsoleMessage.MessageType.ERROR);
-            }
+            FilePath = Command.FilePath;
+            FileName = Command.Text;
+            this.mCommand = Command;
         }
-        public void SendDataArray(byte[] Data, Socket Client)
+        bool FileControl()
         {
-            try
+            FileInfo mfileInfo = new FileInfo(FilePath);
+            return mfileInfo.Exists;
+        }
+        public byte[] GetFileBytes()
+        {
+            if (FileControl())
             {
-                Thread.Sleep(100);
-                Client.Send(Data);
+                byte[] file = File.ReadAllBytes(FilePath + "/" + FileName);
+                return file;
             }
-            catch (Exception ex)
+            return new byte[0];
+        }
+        public string GetFileText()
+        {
+            if (FileControl())
             {
-                Message.Write(ex.Message, ConsoleMessage.MessageType.ERROR);
+                return File.ReadAllText(FilePath + "/" + FileName);
             }
+            return "";
         }
     }
 }
