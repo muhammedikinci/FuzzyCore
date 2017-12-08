@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FuzzyCore.Data;
+﻿using FuzzyCore.Data;
 using FuzzyCore.Commands;
 
 namespace FuzzyCore.Server
@@ -16,8 +11,8 @@ namespace FuzzyCore.Server
 
         public override void Execute()
         {
-            GetFolderList GetFolderList_Command = new GetFolderList();
-            GetFolderList_Command.GetFoldersName(Comm);
+            GetFolderList folderList = new GetFolderList(Comm);
+            folderList.SendFoldersName();
         }
     }
 }
