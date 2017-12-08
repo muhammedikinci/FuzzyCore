@@ -1,25 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
-using System.Net;
-using System.Net.Sockets;
 using Newtonsoft.Json;
-using System.Threading;
 using FuzzyCore.Server;
+using FuzzyCore.CommandClasses;
 
 namespace FuzzyCore.Commands
 {
     public class GetFolderList
     {
         ConsoleMessage message = new ConsoleMessage();
-        public void GetFoldersName(Data.JsonCommand Command)
+        Data.JsonCommand Command;
+        public GetFolderList(Data.JsonCommand Comm)
+        {
+            Command = Comm;
+        }
+        public void SendFoldersName()
         {
             try
             {
-                Socket Client = Command.Client_Socket;
+                var Client = Command.Client_Socket;
 
                 string[] filePaths = Directory.GetFiles(@"" + Command.FilePath, "*",
                                                  SearchOption.TopDirectoryOnly);
@@ -32,7 +31,7 @@ namespace FuzzyCore.Commands
                     comm.CommandType = "file_name";
                     comm.Text = dr.Name;
                     comm.PrevDirectory = dr.Parent.Name;
-                    SendDataString(JsonConvert.SerializeObject(comm), Client);
+                    JsonConvert.SerializeObject(comm).SendDataString(Client);
                 }
                 foreach (string item in folderPath)
                 {
@@ -42,42 +41,13 @@ namespace FuzzyCore.Commands
                     comm.CommandType = "folder_name";
                     comm.Text = dr.Name;
                     comm.PrevDirectory = dr.Parent.Name;
-                    SendDataString(JsonConvert.SerializeObject(comm), Client);
+                    JsonConvert.SerializeObject(comm).SendDataString(Client);
                 }
             }
             catch (Exception ex)
             {
                 message.Write(ex.Message.ToString(), ConsoleMessage.MessageType.ERROR);
                 Console.WriteLine("GetFolderList->GetFoldersName");
-            }
-        }
-
-        // { \"CommandType\" : \"get_folder_list" , "FilePath" : "c:\\muham" }
-        public void SendDataString(String Data, Socket Client)
-        {
-            try
-            {
-                //Thread.Sleep(10);
-                byte[] arr = Encoding.UTF8.GetBytes(Data);
-                Client.Send(arr);
-            }
-            catch (Exception ex)
-            {
-                message.Write(ex.Message,ConsoleMessage.MessageType.ERROR);
-                Console.WriteLine("GetFolderList->SendDataString");
-            }
-        }
-        public void SendDataArray(byte[] Data, Socket Client)
-        {
-            try
-            {
-                Thread.Sleep(100);
-                Client.Send(Data);
-            }
-            catch (Exception ex)
-            {
-                message.Write(ex.Message, ConsoleMessage.MessageType.ERROR);
-                Console.WriteLine("GetFolderList->SendDataArray");
             }
         }
     }
