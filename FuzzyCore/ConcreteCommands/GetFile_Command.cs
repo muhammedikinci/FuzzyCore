@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FuzzyCore.Data;
 using FuzzyCore.Commands;
+using FuzzyCore.CommandClasses;
 
 namespace FuzzyCore.Server
 {
@@ -16,8 +13,9 @@ namespace FuzzyCore.Server
 
         public override void Execute()
         {
-            GetFile GetFileComm = new GetFile();
-            GetFileComm.GetFileBytes(Comm);
+            GetFile getFile = new GetFile(Comm);
+            var fileBytes = getFile.GetFileBytes();
+            fileBytes.SendDataArray(Comm.Client_Socket);
         }
     }
 }
