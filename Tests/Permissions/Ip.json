@@ -1,0 +1,10 @@
+[
+  {
+    "IpAddress": "0.0.0.0",
+    "Permission": "YES"
+  },
+  {
+    "IpAddress": "127.0.0.1",
+    "Permission": "YES"
+  }
+]
