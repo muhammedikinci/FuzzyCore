@@ -71,6 +71,7 @@
   <ItemGroup>
     <Compile Include="ClientProcesses\Client.cs" />
     <Compile Include="ClientProcesses\ClientDestroyer.cs" />
+    <Compile Include="CommandClasses\ExtensionMethods.cs" />
     <Compile Include="CommandClasses\GetFile.cs" />
     <Compile Include="CommandClasses\GetFolderList.cs" />
     <Compile Include="CommandClasses\OpenProgram.cs" />

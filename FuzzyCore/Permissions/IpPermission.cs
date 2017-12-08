@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 namespace FuzzyCore.Permissions
 {
-    class IpPermission : IPermission
+    public class IpPermission : IPermission
     {
         List<PermissionIP> Objects { get; set; }
 
@@ -61,6 +61,7 @@ namespace FuzzyCore.Permissions
             {
                 using (System.IO.StreamReader Reader = new System.IO.StreamReader(FilePath))
                 {
+                    FileContent = Reader.ReadToEnd();
                     Objects = JsonConvert.DeserializeObject<List<PermissionIP>>(Reader.ReadToEnd());
                 }
             }
