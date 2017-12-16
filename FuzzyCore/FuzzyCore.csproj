@@ -99,7 +99,10 @@
     <Compile Include="Initialize\Init.cs" />
     <Compile Include="Initialize\ServerProperties.cs" />
     <Compile Include="Initialize\staticInitData.cs" />
+    <Compile Include="Server\AcceptClient.cs" />
+    <Compile Include="Server\CommanderObject.cs" />
     <Compile Include="Server\GameListener.cs" />
+    <Compile Include="Server\Handler.cs" />
     <Compile Include="Server\Listener.cs" />
     <Compile Include="Pattern\Command.cs" />
     <Compile Include="Pattern\Invoker.cs" />
