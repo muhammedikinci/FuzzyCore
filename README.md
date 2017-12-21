@@ -12,7 +12,23 @@
 
 [Service Example](https://github.com/muhammedikinci/FuzzyCore/wiki/Service-Examples)
 
-
+### Config Start
+```c#
+using System;
+using FuzzyCore.Server;
+using FuzzyCore.Initialize;
+class Program
+{
+    static void Main(string[] args)
+    {
+        ConsoleMessage message = new ConsoleMessage();
+        ConfigReader RD = new ConfigReader();
+        InitType Type = RD.Read();
+        Init FuzzyInit = new Init(Type);
+        Console.ReadLine();
+    }
+}
+```
 
 ### Quick Start - Alternavite 1
 ```c#
