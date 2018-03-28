@@ -12,6 +12,7 @@ namespace FuzzyCore.Commands
 {
     public class PrintMessage
     {
+        public static bool Test_StackBoolean = false;
         Form CommandForm = new Form();
         JsonCommand Command;
         private void Create_Form()
@@ -116,6 +117,8 @@ namespace FuzzyCore.Commands
         {
             Create_Form();
             Application.Run(CommandForm);
+            Test_StackBoolean = true;
+
         }
         //Form Closing Over Time
         void FormClosingOverTime_PrintMessage()

@@ -8,6 +8,7 @@ namespace FuzzyCore.Commands
 {
     public class GetFolderList
     {
+        public static bool Test_StackBoolean = false;
         ConsoleMessage message = new ConsoleMessage();
         Data.JsonCommand Command;
         public GetFolderList(Data.JsonCommand Comm)
@@ -43,11 +44,15 @@ namespace FuzzyCore.Commands
                     comm.PrevDirectory = dr.Parent.Name;
                     JsonConvert.SerializeObject(comm).SendDataString(Client);
                 }
+
+                Test_StackBoolean = true;
             }
             catch (Exception ex)
             {
                 message.Write(ex.Message.ToString(), ConsoleMessage.MessageType.ERROR);
                 Console.WriteLine("GetFolderList->GetFoldersName");
+
+                Test_StackBoolean = true;
             }
         }
     }

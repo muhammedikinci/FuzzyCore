@@ -10,6 +10,7 @@ namespace FuzzyCore.Server
     class ClientDestroyer
     {
         public static Dictionary<int, Client> SocketList;
+        public static int ConnectionTryCount = 3;
 
         static Thread ForciblyThread;
         static int CurrentForciblyClient;
@@ -48,7 +49,7 @@ namespace FuzzyCore.Server
             try
             {
                 int a = 0;
-                while (a <= 3)
+                while (a <= ConnectionTryCount)
                 {
                     Thread.Sleep(1000);
                     if (SocketList[CurrentForciblyClient].CLOSEDSTATE == Client.ClosedStates.FORCIBLY)

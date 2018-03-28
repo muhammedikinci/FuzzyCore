@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FuzzyCore.Data
 {
-    class DataSerializer
+    public class DataSerializer
     {
         public static String LastData = null;
         public static bool CreateCommand = false;

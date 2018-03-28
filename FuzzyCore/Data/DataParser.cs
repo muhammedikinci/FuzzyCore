@@ -9,6 +9,10 @@ namespace FuzzyCore.Data
     public class DataParser
     {
         public static string LastCommand = "None";
+
+        // {4} Cancel or Use embedded system commands
+        public static bool SystemCommandIsActive = true;
+
         JsonCommand jsonComm;
         public static bool OutParserPermission = false;
         public static Action<JsonCommand> OutParser;
@@ -30,7 +34,7 @@ namespace FuzzyCore.Data
             }
             else if (Type.ServerProp.TYPE == Initialize.Props.ServerType.DATATRANFSER)
             {
-
+                DataTransfer();
             }
         }
         void Remoting()
@@ -51,6 +55,10 @@ namespace FuzzyCore.Data
                     jsonComm.Client_Socket = Client;
                     LastCommand = jsonComm.CommandType.ToString();
                 }
+                if (!SystemCommandIsActive)
+                {
+                    goto UserCommands;
+                }
                 switch (jsonComm.CommandType)
                 {
                     case "print_message":
@@ -65,22 +73,6 @@ namespace FuzzyCore.Data
                         {
                             ProgramOpen_Command ProgramOpenCommand = new ProgramOpen_Command(jsonComm);
                             Command Comm = ProgramOpenCommand;
-                            INV = new Invoker(Comm);
-                            INV.Execute();
-                            break;
-                        }
-                    case "get_folder_list":
-                        {
-                            GetFolderList_Command GetFolderListCommand = new GetFolderList_Command(jsonComm);
-                            Command Comm = GetFolderListCommand;
-                            INV = new Invoker(Comm);
-                            INV.Execute();
-                            break;
-                        }
-                    case "get_file":
-                        {
-                            GetFile_Command GetFileCommand = new GetFile_Command(jsonComm);
-                            Command Comm = GetFileCommand;
                             INV = new Invoker(Comm);
                             INV.Execute();
                             break;
@@ -117,6 +109,72 @@ namespace FuzzyCore.Data
                             }
                             break;
                         }
+                }
+                UserCommands:
+                    if (OutParserPermission)
+                    {
+                        OutParser(jsonComm);
+                    }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message + ex.Source.ToString());
+            }
+        }
+        void DataTransfer()
+        {
+            try
+            {
+                DataSerializer ds = new DataSerializer();
+                string a = ds.Serialize(Data);
+                if (a == "WAIT_NEXT_DATA")
+                {
+                    jsonComm.CommandType = "WAIT_NEXT_DATA";
+                    jsonComm.Client_Socket = Client;
+                    LastCommand = jsonComm.CommandType.ToString();
+                }
+                else
+                {
+                    jsonComm = JsonConvert.DeserializeObject<JsonCommand>(a);
+                    jsonComm.Client_Socket = Client;
+                    LastCommand = jsonComm.CommandType.ToString();
+                }
+                if (!SystemCommandIsActive)
+                {
+                    goto UserCommands;
+                }
+                switch (jsonComm.CommandType)
+                {
+                    case "get_folder_list":
+                        {
+                            GetFolderList.Test_StackBoolean = true;
+                            GetFolderList_Command GetFolderListCommand = new GetFolderList_Command(jsonComm);
+                            Command Comm = GetFolderListCommand;
+                            INV = new Invoker(Comm);
+                            INV.Execute();
+                            break;
+                        }
+                    case "get_file":
+                        {
+                            GetFile_Command GetFileCommand = new GetFile_Command(jsonComm);
+                            Command Comm = GetFileCommand;
+                            INV = new Invoker(Comm);
+                            INV.Execute();
+                            break;
+                        }
+                    default:
+                        {
+                            if (OutParserPermission)
+                            {
+                                OutParser(jsonComm);
+                            }
+                            break;
+                        }
+                }
+            UserCommands:
+                if (OutParserPermission)
+                {
+                    OutParser(jsonComm);
                 }
             }
             catch (Exception ex)

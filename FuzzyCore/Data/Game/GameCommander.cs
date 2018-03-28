@@ -41,7 +41,7 @@ namespace FuzzyCore.Data.Game
             var Parse = AF.ToString().Split(':');
             return Parse[0];
         }
-        static void SendTo(this GameCommandObject Value, IPEndPoint eps)
+        public static void SendTo(this GameCommandObject Value, IPEndPoint eps)
         {
             try
             {
@@ -55,6 +55,17 @@ namespace FuzzyCore.Data.Game
             catch (Exception ex)
             {
                 ConsoleMessage.WriteException(ex.Message,"GameCommander.cs","SendTo");
+            }
+        }
+        public static void SendTo(this byte[] data, IPEndPoint eps)
+        {
+            try
+            {
+                UDPWorker.Client.SendTo(data,eps);
+            }
+            catch (Exception ex)
+            {
+                ConsoleMessage.WriteException(ex.Message, "GameCommander.cs", "SendTo");
             }
         }
     }
