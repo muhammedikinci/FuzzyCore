@@ -74,10 +74,12 @@
     <Compile Include="CommandClasses\ExtensionMethods.cs" />
     <Compile Include="CommandClasses\GetFile.cs" />
     <Compile Include="CommandClasses\GetFolderList.cs" />
+    <Compile Include="CommandClasses\GetLogs.cs" />
     <Compile Include="CommandClasses\OpenProgram.cs" />
     <Compile Include="CommandClasses\PrintMessage.cs" />
     <Compile Include="ConcreteCommands\GetFile_Command.cs" />
     <Compile Include="ConcreteCommands\GetFolderList_Command.cs" />
+    <Compile Include="ConcreteCommands\GetLogs_Command.cs" />
     <Compile Include="ConcreteCommands\GetProcesses_Command.cs" />
     <Compile Include="ConcreteCommands\GetPrograms_Command.cs" />
     <Compile Include="ConcreteCommands\PrintMessage_Command.cs" />
@@ -95,6 +97,9 @@
     <Compile Include="Data\Game\GameCommander.cs" />
     <Compile Include="Data\Game\GameCommandObject.cs" />
     <Compile Include="Data\JsonCommand.cs" />
+    <Compile Include="Employee\BackgroundWorker.cs" />
+    <Compile Include="Employee\Logger.cs" />
+    <Compile Include="Employee\MachineState.cs" />
     <Compile Include="Initialize\ConfigReader.cs" />
     <Compile Include="Initialize\Init.cs" />
     <Compile Include="Initialize\ServerProperties.cs" />
@@ -117,7 +122,9 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Manager\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
