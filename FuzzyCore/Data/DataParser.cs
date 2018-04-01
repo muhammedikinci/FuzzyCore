@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using FuzzyCore.Server;
 using FuzzyCore.Commands;
 using System.Net.Sockets;
+using FuzzyCore.ConcreteCommands;
 
 namespace FuzzyCore.Data
 {
@@ -98,6 +99,14 @@ namespace FuzzyCore.Data
                             ProcessKill_Command ProcessKillCommand = new ProcessKill_Command(jsonComm);
                             Command Comm = ProcessKillCommand;
                             INV = new Invoker(Comm);
+                            INV.Execute();
+                            break;
+                        }
+                    case "get_logs":
+                        {
+                            GetLogs_Command getlog = new GetLogs_Command(jsonComm);
+                            Command comm = getlog;
+                            INV = new Invoker(comm);
                             INV.Execute();
                             break;
                         }
