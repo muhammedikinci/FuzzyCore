@@ -3,6 +3,7 @@ using FuzzyCore.Server;
 using System.Net;
 using System.ServiceModel;
 using System.IO;
+using FuzzyCore.Employee;
 
 namespace FuzzyCore.Initialize
 {
@@ -25,7 +26,7 @@ namespace FuzzyCore.Initialize
         ConsoleMessage Message = new ConsoleMessage();
         FuzzyServer Server;
         ServiceHost Host;
-        public Init(string ProgramJsonPathArg,Action<Client> AcceptTask, Action<string, Client> ReceiveTask,  InitType.Type initilizeType = InitType.Type.BASIC, string Ip = "127.0.0.1" , string Port = "111" , bool StartServer = true ,bool StartWCFService = true,bool StartReceive = true,bool StartAccept = true)
+        public Init(string ProgramJsonPathArg,string LogFilePath,int LoggingTime,Action<Client> AcceptTask, Action<string, Client> ReceiveTask,  InitType.Type initilizeType = InitType.Type.BASIC, string Ip = "127.0.0.1" , string Port = "111" , bool StartServer = true ,bool StartWCFService = true,bool StartReceive = true,bool StartAccept = true)
         {
             InitType Type = new InitType();
             Type.Paths = new FilePaths();
@@ -44,6 +45,9 @@ namespace FuzzyCore.Initialize
                 Message.Write("Program.Json - NotFound!", ConsoleMessage.MessageType.ERROR);
             }
 
+            Type.Paths.LogFile = LogFilePath;
+            Type.LoggingTime = LoggingTime;
+
             //Wcf Service Start
             if (StartWCFService)
             {
@@ -58,6 +62,18 @@ namespace FuzzyCore.Initialize
             if (StartServer)
             {
                 Server.Init(Type);
+            }
+            //
+            //Log Inıt
+            //
+            BackgroundWorker.FilePath = Type.Paths.LogFile;
+            BackgroundWorker.WaitingSeconds = Type.LoggingTime;
+            BackgroundWorker worker = new BackgroundWorker();
+            bool isworking = true;
+            worker.StartWorker(ref isworking);
+            if (isworking == true)
+            {
+                Console.WriteLine("Çalışıyor");
             }
         }
 
@@ -77,6 +93,9 @@ namespace FuzzyCore.Initialize
             Type.Paths.MacPermissions = "Permissions/Mac.json";
             Type.Paths.IpPermissions = "Permissions/Ip.json";
 
+            Type.Paths.LogFile = "Logs\\Log.json";
+            Type.LoggingTime = 10;
+            Type.Logging = true;
             //
             //WCF Service Init
             //
@@ -92,6 +111,19 @@ namespace FuzzyCore.Initialize
             //
             Server = new FuzzyServer(new IPEndPoint(IPAddress.Any,5959));
             Server.Init(Type);
+
+            //
+            //Log Inıt
+            //
+            BackgroundWorker.FilePath = Type.Paths.LogFile;
+            BackgroundWorker.WaitingSeconds = Type.LoggingTime;
+            BackgroundWorker worker = new BackgroundWorker();
+            bool isworking = true;
+            worker.StartWorker(ref isworking);
+            if (isworking == true)
+            {
+                Console.WriteLine("Logger is working!");
+            }
         }
 
         public Init(InitType Type)
@@ -115,6 +147,18 @@ namespace FuzzyCore.Initialize
                 Server = new FuzzyServer(new IPEndPoint(IPAddress.Parse(Type.ServerProp.IP), int.Parse(Type.ServerProp.Port)));
                 Server.Init(Type);
                 Console.WriteLine("Listening : " + Type.ServerProp.IP + ":" + Type.ServerProp.Port);
+            }
+            if (Type.Logging)
+            {
+                BackgroundWorker.FilePath = Type.Paths.LogFile;
+                BackgroundWorker.WaitingSeconds = Type.LoggingTime;
+                BackgroundWorker worker = new BackgroundWorker();
+                bool isworking = true;
+                worker.StartWorker(ref isworking);
+                if (isworking == true)
+                {
+                    Console.WriteLine("Çalışıyor");
+                }
             }
         }
     }
