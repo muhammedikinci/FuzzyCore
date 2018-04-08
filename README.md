@@ -86,6 +86,10 @@ namespace TT
 }
 ```
 
+<img src="https://github.com/muhammedikinci/FuzzyCore/blob/master/UML/Employee-Manager.svg">
+<img src="https://github.com/muhammedikinci/FuzzyCore/blob/master/UML/initializing-uml-fuzzy.svg">
+
+
 <h3>For Open Program Command Json File</h3>
 
 <b>Program.json</b> <span> - add to main project (deployment)bin/debug</span>
