@@ -1,17 +1,51 @@
-# FuzzyCore
->Remote Control for Buisness
+## **Fuzzy Remote**
+You can use this library to access other computers from the computer where you can set permissions. Some commands you can use during access are available in the library. 
 
+The library can use TCP and UDP protocols, but there is only TCP usage for commands. Transports data in JSON format on TCP stream.
 
-[Simple Main Project](https://github.com/muhammedikinci/FuzzyCore/wiki/Main-Project-Simple)
+**Commands:**
 
-[Advanced Main Project](https://github.com/muhammedikinci/FuzzyCore/wiki/Main-Project-Advanced)
+ - [Print Message](https://github.com/muhammedikinci/FuzzyCore/wiki/Command-Examples#example-print-message*)
+ - [Open Program](https://github.com/muhammedikinci/FuzzyCore/wiki/Command-Examples#example-open-program)
+ - [List&View -> Files And Folders](https://github.com/muhammedikinci/FuzzyCore/wiki/Command-Examples#example-listview---files-and-folders)
+ - [Get File](https://github.com/muhammedikinci/FuzzyCore/wiki/Command-Examples#example-get-file)
+ - Get Log (Last Added)
+	>Logging tool added to Initializer Class. Can be started as Basic Initializing. When no operation is done in Basic for 10 seconds, the passivity log is recorded. When the motion is detected, the activity is recorded this time. These records are transferred into "Your Project Directory / Debug / Logs / Log.json" in Basic.
+The GetLogs command has been added to the system to retrieve logs. Acceptable logs will be retrieved and examined by the Clients.
 
-[Command Examples](https://github.com/muhammedikinci/FuzzyCore/wiki/Command-Examples)
+```c#
+using System;
+using FuzzyCore.Server;
+using FuzzyCore.Initialize;
 
-[Database Example](https://github.com/muhammedikinci/FuzzyCore/wiki/Database-Example)
+namespace TT
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            ConsoleMessage message = new ConsoleMessage();
+            Init FuzzyInit = new Init("Program.json",Accept,Receive,"127.0.0.1","111");
+            if (FuzzyServer.socketState)
+            {
+                message.Write("Listening! -> "+FuzzyServer.IPAndPort,ConsoleMessage.MessageType.BACKPROCESS);
+            }
+            Console.ReadLine();
+        }
+        static void Accept(Client cl)
+        {
 
-[Service Example](https://github.com/muhammedikinci/FuzzyCore/wiki/Service-Examples)
+        }
+        static void Receive(string str, Client cl)
+        {
 
+        }
+    }
+}
+
+```
+
+## Other Ways
 ### Config Start
 ```c#
 using System;
@@ -86,10 +120,7 @@ namespace TT
 }
 ```
 
-<img src="https://github.com/muhammedikinci/FuzzyCore/blob/master/UML/Employee-Manager.svg">
-<img src="https://github.com/muhammedikinci/FuzzyCore/blob/master/UML/initializing-uml-fuzzy.svg">
-
-
+## Private Files
 <h3>For Open Program Command Json File</h3>
 
 <b>Program.json</b> <span> - add to main project (deployment)bin/debug</span>
@@ -148,38 +179,29 @@ namespace TT
 ]
 ```
 
-### Out DataParser for your commands
-```c#
-static void Main(string[] args)
-        {
-            ConsoleMessage message = new ConsoleMessage();
-            Init FuzzyInit = new Init();
-            DataParser.OutParser = OutParser;
-            DataParser.OutParserPermission = true;
-            if (FuzzyServer.socketState)
-            {
-                message.Write("Listening! -> "+FuzzyServer.IPAndPort,ConsoleMessage.MessageType.BACKPROCESS);
-            }
-            dataBase db = new dataBase(dataBase.databases.MONGODB, "NetworkApp");
-            db.init();
-            Console.ReadLine();
-        }
-        static void OutParser(JsonCommand Comm)
-        {
-            if (Comm.CommandType == "run_my_command")
-            {
-                MyCommand myConcreteCommand = new MyCommand(Comm);
-                Invoker ınv = new Invoker(myConcreteCommand);
-                ınv.Execute();
-            }
-        }
-        static void Accept(Client cl)
-        {
+## Contributing
+You can;
 
-        }
-        static void Receive(string str, Client cl)
-        {
+ - set crypt algorithms to process all data in the network stream.
+ - add new commands.
+ - review tcp listener and sender function for all crashes.
+ - write TESTS  :D
 
-        }
-```
+## Browse Diagrams
+
+<img src="https://github.com/muhammedikinci/FuzzyCore/blob/master/UML/Employee-Manager.svg">
+<img src="https://github.com/muhammedikinci/FuzzyCore/blob/master/UML/initializing-uml-fuzzy.svg">
+
+## **Browse Wiki**
+
+[Simple Main Project](https://github.com/muhammedikinci/FuzzyCore/wiki/Main-Project-Simple)
+
+[Advanced Main Project](https://github.com/muhammedikinci/FuzzyCore/wiki/Main-Project-Advanced)
+
+[Command Examples](https://github.com/muhammedikinci/FuzzyCore/wiki/Command-Examples)
+
+[Database Example](https://github.com/muhammedikinci/FuzzyCore/wiki/Database-Example)
+
+[Service Example](https://github.com/muhammedikinci/FuzzyCore/wiki/Service-Examples)
+
 ![Example Result](https://image.prntscr.com/image/Vu4EWxinQSSSHRDndG46mA.png)
